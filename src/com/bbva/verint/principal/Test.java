@@ -15,7 +15,7 @@ public class Test {
 	public static boolean NuevoDocto(){
 		boolean isOk = false;
 	    try {
-	    	String pathFile = "C://Users//GESFOR-676//Documents//ejemploJson4sept (1).txt";
+	    	String pathFile = "C:/Users/xme2648/Documents/ejemploJson4sept.txt";
 //	    	String pathFile = "/home/iros/Documents/proceso/ejemploJson4sept.txt";
             Scanner input = new Scanner(new File(pathFile));
 	    	

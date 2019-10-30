@@ -33,16 +33,22 @@ public class AlmacenaDocto extends DataSourceManager {
 			System.out.println("Entrando a crear Expediente");
 			Statement st 	= conn.createStatement();
 			verint 			= exp.validaExpediente(conn, verint, st);
+			Map<String, Object> metadata1 	= new HashMap<String, Object>();
+			MapArchiving me 					= new MapArchiving();
+			metadata1 						=  me.generaMetadata(verint);
 			
+			GeneraArchivos.generaJSONDocRuc(verint);
+			GeneraArchivos.generaArchivoEU(verint);
+				System.out.println(verint);
+				
 			if (verint.getIdGabinete() != 0 && verint.getIdDocumento()!= 0 && verint.getNumeroPagina() != 0  && verint.getIdVersion() != 0){
 				Map<String, Object> metadata 	= new HashMap<String, Object>();
 				MapArchiving m 					= new MapArchiving();
 				metadata 						=  m.generaMetadata(verint);
 				System.out.println("Registro a insertar en archivo.control: " + metadata);
-				GeneraContrl contenido = new GeneraContrl();
-				contenido.generaArchivo(metadata.toString());
-				GeneraContrl start = new GeneraContrl();
-				start.CreaArchivoStart();
+				GeneraArchivos contenido = new GeneraArchivos();
+				contenido.generaArchivoCntrl(metadata.toString());
+				contenido.CreaArchivoStart();
 				msgReturn = true;
 				conn.commit();
 			}else {
