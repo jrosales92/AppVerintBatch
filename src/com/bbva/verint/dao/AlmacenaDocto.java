@@ -34,12 +34,12 @@ public class AlmacenaDocto extends DataSourceManager {
 			Statement st 	= conn.createStatement();
 			verint 			= exp.validaExpediente(conn, verint, st);
 			Map<String, Object> metadata1 	= new HashMap<String, Object>();
-			MapArchiving me 					= new MapArchiving();
+			MapArchiving me 				= new MapArchiving();
 			metadata1 						=  me.generaMetadata(verint);
 			
-			GeneraArchivos.generaJSONDocRuc(verint);
-			GeneraArchivos.generaArchivoEU(verint);
-				System.out.println(verint);
+//			GeneraArchivos.generaJSONDocRuc(verint);
+//			GeneraArchivos.generaArchivoEU(verint);
+//			System.out.println(verint);
 				
 			if (verint.getIdGabinete() != 0 && verint.getIdDocumento()!= 0 && verint.getNumeroPagina() != 0  && verint.getIdVersion() != 0){
 				Map<String, Object> metadata 	= new HashMap<String, Object>();

@@ -98,4 +98,22 @@ public class ExpedienteDao {
         st.addBatch(query);
         return insert;
     }
+    
+    public int actualizaFolioDigitalizacion(Connection conn, String folioArchiving) throws SQLException {
+    	System.out.println("Actualiza Folio ");
+        int insert = 0;
+        PreparedStatement pstmnt = null;
+        
+        String query = "UPDATE ......";
+        System.out.println(query);
+        
+        pstmnt = conn.prepareStatement(query);
+        pstmnt.setString(1, "valor1");
+        pstmnt.setString(1, "valorN");
+        pstmnt.executeUpdate();
+        conn.commit();
+        
+        return insert;
+    }
+    
 }

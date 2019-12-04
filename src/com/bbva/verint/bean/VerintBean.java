@@ -14,9 +14,9 @@ public class VerintBean {
 	private int numeroPagina;
 	private String folioDigitalizacion;
 	private String keyIntervener;
-	private int documentKey;
+	private String documentKey;
 	private String contactIdVerint;
-	private Date dateTime;
+	private String dateTime;
 	private int typeOperation;
 	private String typeMatrix;
 	private String typeDocument;
@@ -34,18 +34,18 @@ public class VerintBean {
 	private String contractId;
 	private String nameRecord;
 	private String idCertificacion;
-	private int phaseOperation;
+	private String phaseOperation;
 	
 	public VerintBean() {
 		super();
 	}
 
 	public VerintBean(int cdAplicacion, String tituloAplicacion, long idGabinete, int idDocumento, int idCarpeta,
-			int idVersion, int numeroPagina, String folioDigitalizacion, String keyIntervener, int documentKey,
-			String contactIdVerint, Date dateTime, int typeOperation, String typeMatrix, String typeDocument,
+			int idVersion, int numeroPagina, String folioDigitalizacion, String keyIntervener, String documentKey,
+			String contactIdVerint, String dateTime, int typeOperation, String typeMatrix, String typeDocument,
 			String ext, int size, int product, String cr, String customerId, String funtion, String typeTransact,
 			String sha1n, String descriptionDocument, String service, String signatureAdviser, String contractId,
-			String nameRecord, String idCertificacion, int phaseOperation) {
+			String nameRecord, String idCertificacion, String phaseOperation) {
 		super();
 		this.cdAplicacion = cdAplicacion;
 		this.tituloAplicacion = tituloAplicacion;
@@ -151,11 +151,11 @@ public class VerintBean {
 		this.keyIntervener = keyIntervener;
 	}
 
-	public int getDocumentKey() {
+	public String getDocumentKey() {
 		return documentKey;
 	}
 
-	public void setDocumentKey(int documentKey) {
+	public void setDocumentKey(String documentKey) {
 		this.documentKey = documentKey;
 	}
 
@@ -167,11 +167,11 @@ public class VerintBean {
 		this.contactIdVerint = contactIdVerint;
 	}
 
-	public Date getDateTime() {
+	public String getDateTime() {
 		return dateTime;
 	}
 
-	public void setDateTime(Date dateTime) {
+	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
 
@@ -311,12 +311,12 @@ public class VerintBean {
 		this.idCertificacion = idCertificacion;
 	}
 
-	public int getPhaseOperation() {
+	public String getPhaseOperation() {
 		return phaseOperation;
 	}
 
-	public void setPhaseOperation(int phaseOperation) {
-		this.phaseOperation = phaseOperation;
+	public void setPhaseOperation(String phaseOperation2) {
+		this.phaseOperation = phaseOperation2;
 	}
 
 	@Override

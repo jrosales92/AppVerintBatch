@@ -11,36 +11,21 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.bbva.verint.bean.VerintBean;
+import com.bbva.verint.parametros.ParametrosVerint;
 
 public class GeneraArchivos {
+	
 	FileWriter archivo;
 	
 	public void generaArchivoCntrl(String metadata) {
-		String ruta = "C:/Users/xme2648/Documents/Archivo Ctrl y Start/Verint.cntrl";
+		String ruta = ParametrosVerint.PATHFILES + "Verint.cntrl";
 		String contenido = metadata;
-//		File file = new File(ruta);
-		
 		GeneraArchivos ga = new GeneraArchivos();
 		ga.writeInfoInFile(ruta, contenido);
-		
-//		try {
-//			if (!file.exists()) {
-//				file.createNewFile();
-//			}
-//			FileWriter fw = new FileWriter(file);
-//			BufferedWriter bw = null;
-//			bw = new BufferedWriter(fw);
-//			
-//				bw.write(contenido);
-//				bw.newLine();
-//			bw.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 	public void CreaArchivoStart(){
-		String ruta = "C:/Users/xme2648/Documents/Archivo Ctrl y Start/Verint.start";
+		String ruta = ParametrosVerint.PATHFILES + "Verint.start";
         String contenido2 = " ";
         File file = new File(ruta);
         // Si el archivo no existe es creado
@@ -60,7 +45,7 @@ public class GeneraArchivos {
 	}
 	
 	public static void generaJSONDocRuc(VerintBean verint) {
-		String ruta = "C:/Users/xme2648/Documents/Archivo Ctrl y Start/VerintRuc.txt";
+		String ruta = ParametrosVerint.PATHFILES + "VerintRuc.txt";
 		
 		JSONObject jsonRuc = new JSONObject();
 		JSONArray listContent = new JSONArray();
@@ -90,7 +75,7 @@ public class GeneraArchivos {
 
 		
 		JSONObject contracType = new JSONObject();
-		contracType.put("id", "contracType");
+		contracType.put("id", "contractType");
 		contracType.put("name", "BD-MX-CE-CERTIF-001");
 		jsonListData.put(contracType);
 		
@@ -169,57 +154,37 @@ public class GeneraArchivos {
 			e.printStackTrace();
 		}
 	}
+
 	public static void generaArchivoEU(VerintBean verint) {
-		String ruta = "C:/Users/xme2648/Documents/Archivo Ctrl y Start/VerintEU.txt";
-		
-		JSONObject jsonEU = new JSONObject();
-		JSONArray listContent = new JSONArray();
-		
-		Map<String, Object> mapEU = new HashMap<String, Object>();
-		
-		JSONObject EU = new JSONObject();
-		
-		jsonEU.put("dateTime", verint.getDateTime());
-		jsonEU.put("ext", verint.getExt());
-		jsonEU.put("tipeDocument", verint.getTypeDocument());
-		jsonEU.put("descriptionDocument", verint.getDescriptionDocument());
-		jsonEU.put("nameRecord", verint.getNameRecord());
-		jsonEU.put("product", verint.getProduct());
-		jsonEU.put("cR", verint.getCr());
-		jsonEU.put("typeOperation", verint.getTypeOperation());
-		jsonEU.put("idCertification", verint.getIdCertificacion());
-		jsonEU.put("contactIdVerint", verint.getContractId());
-		jsonEU.put("sha1n", verint.getSha1n());
-		jsonEU.put("folioDigitalizacion", verint.getFolioDigitalizacion());
-		jsonEU.put("typeTransact", verint.getTypeTransact());
-		jsonEU.put("keyIntervener", verint.getKeyIntervener());
-		jsonEU.put("typeMatrix", verint.getTypeMatrix());
-		jsonEU.put("size", verint.getSize());
-		jsonEU.put("funtion", verint.getFuntion());
-		jsonEU.put("documentKey", verint.getDocumentKey());
-		jsonEU.put("service", verint.getService());
-		jsonEU.put("customerId", verint.getCustomerId());
-		jsonEU.put("contractId", verint.getContractId());
-		jsonEU.put("phaseOperation", verint.getPhaseOperation());
-		jsonEU.put("signatureAdviser", verint.getSignatureAdviser());
-		
-		mapEU.put("listData", EU);
-		listContent.put(mapEU);
-		
-		jsonEU.put("listContent", listContent);
+		String ruta = ParametrosVerint.PATHFILES + "VerintEU.txt";
+
+		StringBuilder lineEu = new StringBuilder();
+		lineEu.append(verint.getDateTime()).append("|")
+		.append(verint.getExt()).append("|")
+		.append(verint.getTypeDocument()).append("|")
+		.append(verint.getDescriptionDocument()).append("|")
+		.append(verint.getNameRecord()).append("|")
+		.append(verint.getProduct()).append("|")
+		.append(verint.getCr()).append("|")
+		.append(verint.getTypeOperation()).append("|")
+		.append(verint.getIdCertificacion()).append("|")
+		.append(verint.getContactIdVerint()).append("|")
+		.append(verint.getSha1n()).append("|")
+		.append(verint.getFolioDigitalizacion()).append("|")
+		.append(verint.getTypeTransact()).append("|")
+		.append(verint.getKeyIntervener()).append("|")
+		.append(verint.getTypeMatrix()).append("|")
+		.append(verint.getSize()).append("|")
+		.append(verint.getFuntion()).append("|")
+		.append(verint.getDocumentKey()).append("|")
+		.append(verint.getService()).append("|")
+		.append(verint.getCustomerId()).append("|")
+		.append(verint.getContractId()).append("|")
+		.append(verint.getPhaseOperation()).append("|")
+		.append(verint.getSignatureAdviser()).append("|");
 		
 		GeneraArchivos ga = new GeneraArchivos();
-		ga.writeInfoInFile(ruta, jsonEU.toString());
+		ga.writeInfoInFile(ruta, lineEu.toString());
 		
 	}
 }
-
-
-
-//	public static void main(String[] args) {
-//		Map<String , Object> metadata1 = new HashMap<String, Object>();
-//		JSONObject myJSonRuc = new JSONObject(metadata1.toString());
-//		System.out.println(myJSonRuc.toString());
-//}
-//}
-//

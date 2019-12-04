@@ -22,7 +22,7 @@ public class DocumentoDao {
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, verint.getCdAplicacion());
 			ps.setLong(2, verint.getIdGabinete());
-			ps.setLong(3, verint.getDocumentKey());
+			ps.setString(3, verint.getDocumentKey());
 			ps.setString(4, verint.getTypeMatrix());
 			ps.setString(5, verint.getContactIdVerint());
 			ps.setString(6, verint.getSha1n());

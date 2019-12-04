@@ -1,5 +1,6 @@
 package com.bbva.verint.principal;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,10 +66,9 @@ public class SendDocument {
 			verint.setCdAplicacion(8);
 			verint.setTituloAplicacion(tituloAplicacion);
 			verint.setKeyIntervener(keyIntervener);
-			verint.setDocumentKey(Integer.parseInt(documentKey));
+			verint.setDocumentKey(documentKey);
 			verint.setContactIdVerint(contactIdVerint);
-			// verint.setDateTime((new SimpleDateFormat("dd/MM/yyyyz/hh:mm:ss").parse(dateTime)));
-			// verint.setDateTime(Date.valueOf(dateTime));
+			verint.setDateTime(dateTime);
 			verint.setTypeOperation(Integer.parseInt(typeOperation));
 			verint.setTypeMatrix(typeMatrix);
 			verint.setTypeDocument(typeDocument);
@@ -86,7 +86,7 @@ public class SendDocument {
 			verint.setContractId(contractId);
 			verint.setNameRecord(nameRecord);
 			verint.setIdCertificacion(idCertification);
-			verint.setPhaseOperation(Integer.parseInt(phaseOperation));
+			verint.setPhaseOperation(phaseOperation);
 
 			isOk = new AlmacenaDocto().addFile(verint);
 		} catch (NullPointerException e) {
