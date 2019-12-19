@@ -27,6 +27,7 @@ public class VerintBean {
 	private String customerId;
 	private String funtion;
 	private String typeTransact;
+	private String date;
 	private String sha1n;
 	private String descriptionDocument;
 	private String service;

@@ -56,7 +56,7 @@ public class ResultController extends DataSourceManager{
 				.append(mcexc.getMessage());
 				
 				GeneraArchivos ga = new GeneraArchivos();
-	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_DD/MM/YYYY.txt", sb.toString());
+	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_RESULTdd/mm/yyyy.txt", sb.toString());
 	    		
 	    		
 //				if (mcexc == null)
@@ -76,6 +76,8 @@ public class ResultController extends DataSourceManager{
 					isOk = true;
 				} else {
 					throw new RigClientException(format("Archiving regreso: %s", lineResult));
+//					GeneraArchivos ga = new GeneraArchivos();
+//		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_RESULTdd/mm/yyyy.txt", json.toString());
 				}
 			}
 		}

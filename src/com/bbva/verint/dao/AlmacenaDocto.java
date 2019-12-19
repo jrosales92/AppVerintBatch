@@ -47,7 +47,8 @@ public class AlmacenaDocto extends DataSourceManager {
 				metadata 						=  m.generaMetadata(verint);
 				System.out.println("Registro a insertar en archivo.control: " + metadata);
 				GeneraArchivos contenido = new GeneraArchivos();
-				contenido.generaArchivoCntrl(metadata.toString());
+				JSONObject jsonCtrl = new JSONObject(metadata);
+				contenido.generaArchivoCntrl(jsonCtrl.toString());
 				contenido.CreaArchivoStart();
 				msgReturn = true;
 				conn.commit();

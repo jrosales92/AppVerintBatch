@@ -10,6 +10,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.bbva.verint.controller.ErrorRucEuController;
 import com.bbva.verint.controller.MetadataController;
 import com.bbva.verint.controller.ResultController;
 import com.bbva.verint.dao.GeneraArchivos;
@@ -45,18 +46,18 @@ public class Test {
         		for (int i = 0; i < jsonarray.length(); i++) {
 					jsonObj = jsonarray.getJSONObject(i);
 					System.out.println("Procesando linea: " +i);
-					MetadataController.mapJsonInputString(jsonObj.toString());
+//					MetadataController.mapJsonInputString(jsonObj.toString());
 					isOk = SendDocument.almacenaInformacion(jsonObj);
 				}
             }
             input.close();
-        } catch (CustomException ex) {
-    		GeneraArchivos ga = new GeneraArchivos();
-    		//TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
-    		SimpleDateFormat ERRORES_RESULT = new SimpleDateFormat("dd/mm/yyyy",Locale.getDefault());
-    		Date hoy = new Date(0);
-    		String NombreArchivoERR = ERRORES_RESULT.format(hoy);
-    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + NombreArchivoERR, ex.getMessage());
+//        } catch (CustomException ex) {
+//    		GeneraArchivos ga = new GeneraArchivos();
+//    		//TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
+//    		SimpleDateFormat ERRORES_RESULT = new SimpleDateFormat("dd/mm/yyyy",Locale.getDefault());
+//    		Date hoy = new Date(0);
+//    		String NombreArchivoERR = ERRORES_RESULT.format(hoy);
+//    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ArchivoError" + hoy, ex.getMessage());
         } catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -88,25 +89,27 @@ public class Test {
 		return isOk;
 	}
 	
-//	public static boolean cargaResulados(String pathFile){
-//		boolean isOk = false;
-//	    try {
-//            Scanner input = new Scanner(new File(pathFile));
-//            while (input.hasNextLine()) {
-//                String line = input.nextLine();
-//        		JSONArray jsonarray = new JSONArray(line);
-//        		JSONObject jsonObj = null;
-//        		for (int i = 0; i < jsonarray.length(); i++) {
-//					jsonObj = jsonarray.getJSONObject(i);
-//					System.out.println("Procesando linea: " +i);
-//					isOk = SendDocument.almacenaInformacion(jsonObj);
-//				}
-//            }
-//            input.close();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//
-//		return isOk;
-//	}
+	public static boolean cargaArchERR(String pathFile){
+		boolean isOk = false;
+	    try {
+            Scanner input = new Scanner(new File(pathFile));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+        		JSONArray jsonarray = new JSONArray(line);
+        		JSONObject jsonObj = null;
+        		for (int i = 0; i < jsonarray.length(); i++) {
+					jsonObj = jsonarray.getJSONObject(i);
+					System.out.println("Procesando linea: " +i);
+					
+					isOk = (ErrorRucEuController.mapJsonInputString(jsonObj) !=null ? true : false);
+					
+				}
+            }
+            input.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+		return isOk;
+	}
 }
