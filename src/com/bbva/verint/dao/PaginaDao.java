@@ -48,7 +48,7 @@ public class PaginaDao {
 		String query = "INSERT INTO GORAPR.TATN005_PAGINA (CD_PAGINA, CD_VERSION,CD_DOCUMENTO, CD_EXPEDIENTE, CD_APLICACION , "
 				+ "CD_FOLIO, NB_ARCHIVO, NU_SIZE, NB_EXTENSION, NB_SHA1, TM_DIGITALIZACION , CD_USUARIO)  VALUES "
 				+ " ( "+ bean.getNumeroPagina()+" , "+bean.getIdVersion()+" , "+bean.getIdDocumento()+" , "+ bean.getIdGabinete()+" , "
-				+ " "+bean.getCdAplicacion()+" , '"+bean.getFolioDigitalizacion()+"' ,"
+				+ " "+bean.getCdAplicacion()+" , '' ,"
 				+ " '"+bean.getNameRecord()+"' , "+bean.getSize()+", '"+bean.getExt().toLowerCase()+"' , '"+bean.getSha1n()+"', sysdate ,'"+ bean.getTituloAplicacion() + "')";
 		System.out.println(query);
 		st.addBatch(query);

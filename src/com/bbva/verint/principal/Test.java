@@ -32,6 +32,10 @@ public class Test {
 			break;
 		default:
 			break;
+		case 3:
+			System.out.println("Entre a switch 3 lectura archivoerror");
+			cargaArchERR(args[0]);
+			break;	
 		}
 	}
 
@@ -53,7 +57,7 @@ public class Test {
             input.close();
 //        } catch (CustomException ex) {
 //    		GeneraArchivos ga = new GeneraArchivos();
-//    		//TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
+    		//TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
 //    		SimpleDateFormat ERRORES_RESULT = new SimpleDateFormat("dd/mm/yyyy",Locale.getDefault());
 //    		Date hoy = new Date(0);
 //    		String NombreArchivoERR = ERRORES_RESULT.format(hoy);
@@ -66,20 +70,18 @@ public class Test {
 	}
 	
 	public static boolean procesaResult(String pathFile){
-		JSONObject jsonObj = null;
 		boolean isOk = false;
+		int j = 0;
 	    try {
             Scanner input = new Scanner(new File(pathFile));
             while (input.hasNextLine()) {
                 String lineResult = input.nextLine();
+                System.out.println("Procesando linea: " + j);
                 if(ResultController.validaResult(lineResult)) {
-            		JSONArray jsonarray = new JSONArray(lineResult);
-                	for (int i = 0; i < jsonObj.length(); i++) {
-                		jsonObj = jsonarray.getJSONObject(i);
-                		System.out.println("Procesando linea: " +i);
+                	JSONObject jsonObj = new JSONObject(lineResult);
                 		isOk = ResultController.registraFolio(jsonObj);
-                	}                	
                 }
+                j++;
             }
             input.close();
         } catch (Exception ex) {

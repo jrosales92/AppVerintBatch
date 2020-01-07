@@ -104,12 +104,18 @@ public class ExpedienteDao {
         int insert = 0;
         PreparedStatement pstmnt = null;
         
-        String query = "UPDATE ......";
+        Fortimax f = new Fortimax(folioArchiving);
+        
+        String query = "UPDATE GORAPR.tatn005_pagina set cd_folio = ? WHERE CD_APLICACION = ? AND CD_EXPEDIENTE = ? AND CD_DOCUMENTO = ? AND CD_VERSION = ? AND CD_PAGINA = ?";
         System.out.println(query);
         
         pstmnt = conn.prepareStatement(query);
-        pstmnt.setString(1, "valor1");
-        pstmnt.setString(1, "valorN");
+        pstmnt.setString(1,folioArchiving);
+        pstmnt.setInt(2, 8);
+        pstmnt.setInt(3, f.getIdGabinete());
+        pstmnt.setInt(4, f.getIdDocumento());
+        pstmnt.setInt(5, f.getVersion());
+        pstmnt.setInt(6, f.getPagina());
         pstmnt.executeUpdate();
         conn.commit();
         

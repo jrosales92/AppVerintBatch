@@ -11,9 +11,9 @@ import com.bbva.verint.bean.VerintBean;
 public class MapArchiving {
 	
 	public Map<String, Object>  generaMetadata (VerintBean verint){
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String date = sdf.format(new Date()); 
-		
+
 	
 		Map<String, Object> metadata = new HashMap<String, Object>();
 		metadata.put("t", verint.getTituloAplicacion());//Titulo aplicacion
@@ -30,7 +30,7 @@ public class MapArchiving {
 		metadata.put("ki", verint.getKeyIntervener()); //keyIntervener
 		metadata.put("dk", verint.getDocumentKey());		//clave del Documento
 		metadata.put("cv", verint.getContactIdVerint());     //id contact Verint
-		metadata.put("fh", date);            //fecha
+		metadata.put("fd", date);            //fecha
 		metadata.put("to", verint.getTypeOperation());      //id Carpeta
 		metadata.put("tm", verint.getTypeMatrix());    //idDocumentos
 		metadata.put("td", verint.getTypeDocument());      //id version

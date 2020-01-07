@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,14 +21,20 @@ public class GeneraArchivos {
 	FileWriter archivo;
 	
 	public void generaArchivoCntrl(String metadata) {
-		String ruta = ParametrosVerint.PATHFILES + "Verint.cntrl";
+		Date fecha = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+		String Hoy = formato.format(fecha);
+		String ruta = ParametrosVerint.PATHFILES + "verint_D01_" + Hoy + "_Audios_IN.CTRL";
 		String contenido = metadata;
 		GeneraArchivos ga = new GeneraArchivos();
 		ga.writeInfoInFile(ruta, contenido);
 	}
 	
 	public void CreaArchivoStart(){
-		String ruta = ParametrosVerint.PATHFILES + "Verint.start";
+		Date fecha = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+		String Hoy = formato.format(fecha);
+		String ruta = ParametrosVerint.PATHFILES + "verint_D01_" + Hoy + "_Audios_IN.START";
         String contenido2 = " ";
         File file = new File(ruta);
         // Si el archivo no existe es creado
@@ -45,7 +54,7 @@ public class GeneraArchivos {
 	}
 	
 	public static void generaJSONDocRuc(VerintBean verint) {
-		String ruta = ParametrosVerint.PATHFILES + "VerintRuc.txt";
+		String ruta = ParametrosVerint.PATHFILES + "NOM151_AUDIOS_AAMMDD.TXT";
 		
 		JSONObject jsonRuc = new JSONObject();
 		JSONArray listContent = new JSONArray();
@@ -156,7 +165,10 @@ public class GeneraArchivos {
 	}
 
 	public static void generaArchivoEU(VerintBean verint) {
-		String ruta = ParametrosVerint.PATHFILES + "VerintEU.txt";
+		Date fecha = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy_hhmm");
+		String Hoy = formato.format(fecha);
+		String ruta = ParametrosVerint.PATHFILES + "VERINT_EU_MSD_" + Hoy + ".txt";
 
 		StringBuilder lineEu = new StringBuilder();
 		lineEu.append(verint.getDateTime()).append("|")

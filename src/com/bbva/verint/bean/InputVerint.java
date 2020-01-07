@@ -5,12 +5,12 @@ public class InputVerint {
 	private String documentKey;
 	private String contactIdVerint;
 	private String dateTime;
-	private int typeOperation;
+	private String typeOperation;
 	private String typeMatrix;
 	private String typeDocument;
 	private String ext;
-	private int size;
-	private int product;
+	private String size;
+	private String product;
 	private String cr;
 	private String customerId;
 	private String funtion;
@@ -29,7 +29,7 @@ public class InputVerint {
 	}
 
 	public InputVerint(String keyIntervener, String documentKey, String contactIdVerint, String dateTime,
-			int typeOperation, String typeMatrix, String typeDocument, String ext, int size, int product, String cr,
+			String typeOperation, String typeMatrix, String typeDocument, String ext, String size, String product, String cr,
 			String customerId, String funtion, String typeTransact, String sha1n, String descriptionDocument,
 			String service, String signatureAdviser, String contractId, String nameRecord, String idCertificacion,
 			String phaseOperation) {
@@ -117,14 +117,14 @@ public class InputVerint {
 	/**
 	 * @return the typeOperation
 	 */
-	public int getTypeOperation() {
+	public String getTypeOperation() {
 		return typeOperation;
 	}
 
 	/**
 	 * @param typeOperation the typeOperation to set
 	 */
-	public void setTypeOperation(int typeOperation) {
+	public void setTypeOperation(String typeOperation) {
 		this.typeOperation = typeOperation;
 	}
 
@@ -173,28 +173,28 @@ public class InputVerint {
 	/**
 	 * @return the size
 	 */
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
 
 	/**
 	 * @param size the size to set
 	 */
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
 	/**
 	 * @return the product
 	 */
-	public int getProduct() {
+	public String getProduct() {
 		return product;
 	}
 
 	/**
 	 * @param product the product to set
 	 */
-	public void setProduct(int product) {
+	public void setProduct(String product) {
 		this.product = product;
 	}
 

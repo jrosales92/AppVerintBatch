@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import com.bancomer.pia.dsmngr.DataSourceManager;
 import com.bbva.verint.bean.VerintBean;
+import com.bbva.verint.dao.AlmacenaDocto;
 import com.bbva.verint.dao.ExpedienteDao;
 import com.bbva.verint.dao.GeneraArchivos;
 import com.bbva.verint.dao.PaginaDao;
@@ -45,8 +46,6 @@ public class ResultController extends DataSourceManager{
 						mcexc = new RigClientException(json.getString("_error_message"), mcexc);
 				}
 
-				if(mcexc == null)
-					isOk= false;
 				
 				StringBuilder sb = new StringBuilder();
 				sb.append("ERROR002")
@@ -56,18 +55,23 @@ public class ResultController extends DataSourceManager{
 				.append(mcexc.getMessage());
 				
 				GeneraArchivos ga = new GeneraArchivos();
-	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_RESULTdd/mm/yyyy.txt", sb.toString());
+	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_VERINT_RESULT.txt", sb.toString());
 	    		
+	    		
+	    		if(mcexc != null)
+	    			return isOk;
 	    		
 //				if (mcexc == null)
-//					throw new RigClientException(format("Enviando documento %s", metadata.get("nd")));
+//					return isOk;
+//					//throw new RigClientException(format("Enviando documento %s", "error-prueba"));
 //				else
-//					throw new RigClientException(format("Enviando documento %s", metadata.get("nd")), mcexc);
+//					
+//					//throw new RigClientException(format("Enviando documento %s","error-prueba"), mcexc);
 			}
 
 			Object succ = json.get("success");
 			if (!(succ instanceof JSONArray)) {
-				throw new RigClientException(format("Archiving regreso: %s", lineResult));
+				throw new RigClientException(format("Archiving regreso: %s", json));
 			} else {
 				JSONArray success = json.getJSONArray("success");
 				if (success.length() > 0) {
@@ -75,17 +79,17 @@ public class ResultController extends DataSourceManager{
 					folioArchiving = format("%s@%s", json.getString("_s3_bucket"), json.getString("_s3_key"));
 					isOk = true;
 				} else {
-					throw new RigClientException(format("Archiving regreso: %s", lineResult));
-//					GeneraArchivos ga = new GeneraArchivos();
-//		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_RESULTdd/mm/yyyy.txt", json.toString());
+					throw new RigClientException(format("Archiving regreso: %s", json));
+					}
+					GeneraArchivos ga = new GeneraArchivos();
+		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "Resguardado_VERINT_RESULT.txt", json.toString());
 				}
 			}
+			return isOk;
 		}
-		
-		return isOk;
-	}
 	
-	public static boolean registraFolio(JSONObject informacion) {
+	
+	public static boolean registraFolio(JSONObject jsonObj) {
 		Connection conn = null;
 		String tituloAplicacion, keyIntervener, documentKey, contactIdVerint, dateTime, typeOperation, typeMatrix,
 		typeDocument, ext, size, product, cr, customerId, funtion, typeTransact, sha1n, descriptionDocument,
@@ -96,37 +100,43 @@ public class ResultController extends DataSourceManager{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		JSONObject json;
-		JSONArray success = informacion.getJSONArray("success");
-		json = success.getJSONObject(0);
-		String folioArchiving = format("%s@%s", json.getString("_s3_bucket"), json.getString("_s3_key"));
+		JSONArray success = jsonObj.getJSONArray("success");
+		jsonObj = success.getJSONObject(0);
+		String folioArchiving = format("%s@%s", jsonObj.getString("_s3_bucket"), jsonObj.getString("_s3_key"));
 		ExpedienteDao expDao = new ExpedienteDao();
 		try {
-			conn = getConnectionStatic();
+//			conn = getConnectionStatic();
+			if ("P".equals(ParametrosVerint.AMBIENTE)) {
+				conn = getConnectionStatic();
+			}else if("T".equals(ParametrosVerint.AMBIENTE)){
+				conn = AlmacenaDocto.Buscaconexion();
+			}
+			
 			expDao.actualizaFolioDigitalizacion(conn, folioArchiving);
 			
 			tituloAplicacion 	= "VERINT";
-			keyIntervener    	= (String) informacion.get("keyIntervener");
-			documentKey      	= (String) informacion.get("documentKey");
-			contactIdVerint  	= (String) informacion.get("contactIdVerint");
-			dateTime 			= (String) informacion.get("dateTime");
-			typeOperation 		= (String) informacion.get("typeOperation");
-			typeMatrix 			= (String) informacion.get("typeMatrix");
-			typeDocument 		= (String) informacion.get("tipeDocument");
-			ext 				= (String) informacion.get("ext");
-			size 				= (String) informacion.get("size");
-			product 			= (String) informacion.get("product");
-			cr 					= (String) informacion.get("cR");
-			customerId 			= (String) informacion.get("customerId");
-			funtion 			= (String) informacion.get("funtion");
-			typeTransact 		= (String) informacion.get("typeTransact");
-			sha1n 				= (String) informacion.get("sha1n");
-			descriptionDocument = (String) informacion.get("descriptionDocument");
-			service 			= (String) informacion.get("service");
-			signatureAdviser 	= (String) informacion.get("signatureAdviser");
-			contractId 			= (String) informacion.get("contractId");
-			nameRecord 			= (String) informacion.get("nameRecord");
-			idCertification 	= (String) informacion.get("idCertification");
-			phaseOperation 		= (String) informacion.get("phaseOperation");
+			keyIntervener    	= (String) jsonObj.get("ki");
+			documentKey      	= (String) jsonObj.get("dk");
+			contactIdVerint  	= (String) jsonObj.get("cv");
+			dateTime 			= (String) jsonObj.get("dt");
+			typeOperation 		= (String) jsonObj.get("to");
+			typeMatrix 			= (String) jsonObj.get("tm");
+			typeDocument 		= (String) jsonObj.get("td");
+			ext 				= (String) jsonObj.get("e");
+			size 				= (String) jsonObj.get("s");
+			product 			= (String) jsonObj.get("p");
+			cr 					= (String) jsonObj.get("cr");
+			customerId 			= (String) jsonObj.get("ci");
+			funtion 			= (String) jsonObj.get("fu");
+			typeTransact 		= (String) jsonObj.get("tt");
+			sha1n 				= (String) jsonObj.get("sha1N");
+			descriptionDocument = (String) jsonObj.get("dd");
+			service 			= (String) jsonObj.get("se");
+			signatureAdviser 	= (String) jsonObj.get("sa");
+			contractId 			= (String) jsonObj.get("cid");
+			nameRecord 			= (String) jsonObj.get("nr");
+			idCertification 	= (String) jsonObj.get("ic");
+			phaseOperation 		= (String) jsonObj.get("po");
 
 			VerintBean verint = new VerintBean();
 			verint.setTituloAplicacion("VERINT");
@@ -168,6 +178,8 @@ public class ResultController extends DataSourceManager{
 			GeneraArchivos.generaArchivoEU(verint);
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;

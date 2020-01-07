@@ -28,27 +28,15 @@ public class MetadataController {
 		InputVerint input;
 		try {
 			input = new ObjectMapper().readValue(jsonInString, InputVerint.class);
-		} catch (IOException ex) {
-			throw new InvalidJSON004(ex);
-		}
+		
 		try {
-			Validate.notBlank(input.getCustomerId());
+			Validate.notBlank(input.getKeyIntervener());
 		} catch (Exception e) {
 			sb.append("ERROR001")
 			.append("|")
-			.append(input.getNameRecord())
+			.append(input.getKeyIntervener())		
 			.append("|")
-			.append("Metadata incompleta [CustomerId]");
-			throw new InvalidAttribute001(sb.toString(), e);
-		}
-		try {
-			Validate.notBlank(input.getContractId());
-		} catch (Exception e) {
-			sb.append("ERROR001")
-			.append("|")
-			.append(input.getNameRecord())
-			.append("|")
-			.append("Metadata incompleta [ContractId]");
+			.append("Metadata incompleta [KeyIntervener]");
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
@@ -56,9 +44,9 @@ public class MetadataController {
 		} catch (Exception e) {
 			sb.append("ERROR001")
 			.append("|")
-			.append(input.getNameRecord())
+			.append(input.getDocumentKey())
 			.append("|")
-			.append("Metadata incompleta [Documentkey]");
+			.append("Metadata incompleta [DocumentKey]");
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
@@ -66,9 +54,169 @@ public class MetadataController {
 		} catch (Exception e) {
 			sb.append("ERROR001")
 			.append("|")
-			.append(input.getNameRecord())
+			.append(input.getContactIdVerint())
 			.append("|")
 			.append("Metadata incompleta [ContactIdVerint]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getDateTime());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getDateTime())
+			.append("|")
+			.append("Metadata incompleta [DateTime]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getTypeOperation());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getTypeOperation())
+			.append("|")
+			.append("Metadata incompleta [TypeOperation]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getTypeMatrix());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getTypeMatrix())
+			.append("|")
+			.append("Metadata incompleta [TypeMatrix]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getExt());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getExt())
+			.append("|")
+			.append("Metadata incompleta [Ext]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getTypeDocument());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getTypeDocument())
+			.append("|")
+			.append("Metadata incompleta [TypeDocument]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getSize());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getSize())
+			.append("|")
+			.append("Metadata incompleta [Size]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getProduct());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getProduct())
+			.append("|")
+			.append("Metadata incompleta [Product]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getCr());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getCr())
+			.append("|")
+			.append("Metadata incompleta [CR]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getCustomerId());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getCustomerId())
+			.append("|")
+			.append("Metadata incompleta [CustomerId]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getFuntion());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getFuntion())
+			.append("|")
+			.append("Metadata incompleta [Funtion]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getTypeTransact());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getTypeTransact())
+			.append("|")
+			.append("Metadata incompleta [TypeTransact]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getSha1n());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getSha1n())
+			.append("|")
+			.append("Metadata incompleta [Sha1N]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getDescriptionDocument());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getDescriptionDocument())
+			.append("|")
+			.append("Metadata incompleta [DescriptionDocument]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getSignatureAdviser());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getSignatureAdviser())
+			.append("|")
+			.append("Metadata incompleta [SignatureAdviser]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getService());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getService())
+			.append("|")
+			.append("Metadata incompleta [Service]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getContractId());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getContractId())
+			.append("|")
+			.append("Metadata incompleta [ContractId]");
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
@@ -82,24 +230,27 @@ public class MetadataController {
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
-			Validate.notBlank(input.getExt());
-		} catch (Exception e) {
-			sb.append("ERROR001")
-			.append("|")
-			.append(input.getNameRecord())
-			.append("|")
-			.append("Metadata incompleta [Ext]");
-			throw new InvalidAttribute001(sb.toString(), e);
-		}
-		try {
 			Validate.notBlank(input.getIdCertificacion());
 		} catch (Exception e) {
 			sb.append("ERROR001")
 			.append("|")
-			.append(input.getNameRecord())
+			.append(input.getIdCertificacion())
 			.append("|")
-			.append("Metadata incompleta [IdCertificacion]");
+			.append("Metadata incompleta [IdCertification]");
 			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		try {
+			Validate.notBlank(input.getPhaseOperation());
+		} catch (Exception e) {
+			sb.append("ERROR001")
+			.append("|")
+			.append(input.getPhaseOperation())
+			.append("|")
+			.append("Metadata incompleta [PhaseOperation]");
+			throw new InvalidAttribute001(sb.toString(), e);
+		}
+		} catch (IOException e) {
+			throw new InvalidJSON004(e);
 		}
 		return input;
 	}

@@ -8,13 +8,15 @@ public class Fortimax {
 	private int idCarp  = -1;
 	private int idDoc   = -1;
 	private int version = -1;
+	private int pagina  = -1;
 	
-	public Fortimax(String titApp, int idGab, int idCarp, int idDoc, int version) {
+	public Fortimax(String titApp, int idGab, int idCarp, int idDoc, int version, int pagina) {
 		this.titApp  = titApp;
 		this.idGab   = idGab;
 		this.idCarp  = idCarp;
 		this.idDoc   = idDoc;
 		this.version = version;
+		this.pagina  = pagina;
 	}
 	
 	public Fortimax(String nodeId) {
@@ -29,7 +31,10 @@ public class Fortimax {
 
 		try {
 			for (int i = maxLen; i >= 0; i--) {
-				if ('V' == nodeId.charAt(i)) {
+				if ('P' == nodeId.charAt(i)) {
+					lastPos = i;
+					pagina = Integer.parseInt(nodeId.substring(i + 1));
+				}else if ('V' == nodeId.charAt(i)) {
 					lastPos = i;
 					version = Integer.parseInt(nodeId.substring(i + 1));
 				} else if ('D' == nodeId.charAt(i)) {
@@ -89,5 +94,9 @@ public class Fortimax {
 	
 	public int getVersion() {
 		return version;
+	}
+	
+	public int getPagina() {
+		return pagina;
 	}
 }
