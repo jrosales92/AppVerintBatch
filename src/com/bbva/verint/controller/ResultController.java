@@ -70,12 +70,14 @@ public class ResultController extends DataSourceManager{
 			}
 
 			Object succ = json.get("success");
+			
 			if (!(succ instanceof JSONArray)) {
-				throw new RigClientException(format("Archiving regreso: %s", json));
+					throw new RigClientException(format("Archiving regreso: %s", json));
 			} else {
 				JSONArray success = json.getJSONArray("success");
 				if (success.length() > 0) {
 					json = success.getJSONObject(0);
+					
 					folioArchiving = format("%s@%s", json.getString("_s3_bucket"), json.getString("_s3_key"));
 					isOk = true;
 				} else {
@@ -105,7 +107,6 @@ public class ResultController extends DataSourceManager{
 		String folioArchiving = format("%s@%s", jsonObj.getString("_s3_bucket"), jsonObj.getString("_s3_key"));
 		ExpedienteDao expDao = new ExpedienteDao();
 		try {
-//			conn = getConnectionStatic();
 			if ("P".equals(ParametrosVerint.AMBIENTE)) {
 				conn = getConnectionStatic();
 			}else if("T".equals(ParametrosVerint.AMBIENTE)){
@@ -115,6 +116,7 @@ public class ResultController extends DataSourceManager{
 			expDao.actualizaFolioDigitalizacion(conn, folioArchiving);
 			
 			tituloAplicacion 	= "VERINT";
+			folioArchiving      = (String) jsonObj.get("f");
 			keyIntervener    	= (String) jsonObj.get("ki");
 			documentKey      	= (String) jsonObj.get("dk");
 			contactIdVerint  	= (String) jsonObj.get("cv");
@@ -150,6 +152,7 @@ public class ResultController extends DataSourceManager{
 
 			log.info("LLENANDO BEAN.VERINT");
 			verint.setCdAplicacion(8);
+			verint.setFolioDigitalizacion(folioArchiving);
 			verint.setTituloAplicacion(tituloAplicacion);
 			verint.setKeyIntervener(keyIntervener);
 			verint.setDocumentKey(documentKey);
@@ -174,7 +177,9 @@ public class ResultController extends DataSourceManager{
 			verint.setIdCertificacion(idCertification);
 			verint.setPhaseOperation(phaseOperation);
 			
-			GeneraArchivos.generaJSONDocRuc(verint);
+			if (!(jsonObj.getString("ic").isEmpty())) {
+				GeneraArchivos.generaJSONDocRuc(verint);
+			}
 			GeneraArchivos.generaArchivoEU(verint);
 			
 		} catch (SQLException e) {

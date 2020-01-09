@@ -23,12 +23,13 @@ public class MetadataController {
 
 	public static InputVerint mapJsonInputString(String jsonInString) throws CustomException {
 		log.info("Inicia mapeo de json input string");
-		StringBuilder sb = new StringBuilder();
-		
 		InputVerint input;
+
+		
 		try {
 			input = new ObjectMapper().readValue(jsonInString, InputVerint.class);
-		
+			StringBuilder sb = new StringBuilder();
+
 		try {
 			Validate.notBlank(input.getKeyIntervener());
 		} catch (Exception e) {
@@ -190,26 +191,6 @@ public class MetadataController {
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
-			Validate.notBlank(input.getSignatureAdviser());
-		} catch (Exception e) {
-			sb.append("ERROR001")
-			.append("|")
-			.append(input.getSignatureAdviser())
-			.append("|")
-			.append("Metadata incompleta [SignatureAdviser]");
-			throw new InvalidAttribute001(sb.toString(), e);
-		}
-		try {
-			Validate.notBlank(input.getService());
-		} catch (Exception e) {
-			sb.append("ERROR001")
-			.append("|")
-			.append(input.getService())
-			.append("|")
-			.append("Metadata incompleta [Service]");
-			throw new InvalidAttribute001(sb.toString(), e);
-		}
-		try {
 			Validate.notBlank(input.getContractId());
 		} catch (Exception e) {
 			sb.append("ERROR001")
@@ -230,16 +211,6 @@ public class MetadataController {
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		try {
-			Validate.notBlank(input.getIdCertificacion());
-		} catch (Exception e) {
-			sb.append("ERROR001")
-			.append("|")
-			.append(input.getIdCertificacion())
-			.append("|")
-			.append("Metadata incompleta [IdCertification]");
-			throw new InvalidAttribute001(sb.toString(), e);
-		}
-		try {
 			Validate.notBlank(input.getPhaseOperation());
 		} catch (Exception e) {
 			sb.append("ERROR001")
@@ -250,7 +221,7 @@ public class MetadataController {
 			throw new InvalidAttribute001(sb.toString(), e);
 		}
 		} catch (IOException e) {
-			throw new InvalidJSON004(e);
+			throw new InvalidJSON004 (e);
 		}
 		return input;
 	}

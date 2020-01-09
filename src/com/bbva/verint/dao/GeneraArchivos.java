@@ -54,7 +54,10 @@ public class GeneraArchivos {
 	}
 	
 	public static void generaJSONDocRuc(VerintBean verint) {
-		String ruta = ParametrosVerint.PATHFILES + "NOM151_AUDIOS_AAMMDD.TXT";
+		Date fecha = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("yymmdd");
+		String Hoy = formato.format(fecha);
+		String ruta = ParametrosVerint.PATHFILES + "NOM151_AUDIOS_" + Hoy + ".txt";
 		
 		JSONObject jsonRuc = new JSONObject();
 		JSONArray listContent = new JSONArray();
@@ -166,7 +169,7 @@ public class GeneraArchivos {
 
 	public static void generaArchivoEU(VerintBean verint) {
 		Date fecha = new Date();
-		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy_hhmm");
+		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
 		String Hoy = formato.format(fecha);
 		String ruta = ParametrosVerint.PATHFILES + "VERINT_EU_MSD_" + Hoy + ".txt";
 

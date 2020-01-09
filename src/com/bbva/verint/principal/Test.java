@@ -50,18 +50,15 @@ public class Test {
         		for (int i = 0; i < jsonarray.length(); i++) {
 					jsonObj = jsonarray.getJSONObject(i);
 					System.out.println("Procesando linea: " +i);
-//					MetadataController.mapJsonInputString(jsonObj.toString());
+					MetadataController.mapJsonInputString(jsonObj.toString());
 					isOk = SendDocument.almacenaInformacion(jsonObj);
 				}
             }
             input.close();
-//        } catch (CustomException ex) {
-//    		GeneraArchivos ga = new GeneraArchivos();
-    		//TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
-//    		SimpleDateFormat ERRORES_RESULT = new SimpleDateFormat("dd/mm/yyyy",Locale.getDefault());
-//    		Date hoy = new Date(0);
-//    		String NombreArchivoERR = ERRORES_RESULT.format(hoy);
-//    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ArchivoError" + hoy, ex.getMessage());
+        } catch (CustomException ex) {
+    		GeneraArchivos ga = new GeneraArchivos();
+//    		TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
+    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT.txt", ex.getMessage());
         } catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
