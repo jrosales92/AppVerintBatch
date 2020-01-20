@@ -7,11 +7,11 @@ public class InputVerint {
 	private String dateTime;
 	private String typeOperation;
 	private String typeMatrix;
-	private String typeDocument;
+	private String tipeDocument;
 	private String ext;
 	private String size;
 	private String product;
-	private String cr;
+	private String cR;
 	private String customerId;
 	private String funtion;
 	private String typeTransact;
@@ -21,7 +21,7 @@ public class InputVerint {
 	private String signatureAdviser;
 	private String contractId;
 	private String nameRecord;
-	private String idCertificacion;
+	private String idCertification;
 	private String phaseOperation;
 	
 	public InputVerint() {
@@ -29,9 +29,9 @@ public class InputVerint {
 	}
 
 	public InputVerint(String keyIntervener, String documentKey, String contactIdVerint, String dateTime,
-			String typeOperation, String typeMatrix, String typeDocument, String ext, String size, String product, String cr,
+			String typeOperation, String typeMatrix, String tipeDocument, String ext, String size, String product, String cR,
 			String customerId, String funtion, String typeTransact, String sha1n, String descriptionDocument,
-			String service, String signatureAdviser, String contractId, String nameRecord, String idCertificacion,
+			String service, String signatureAdviser, String contractId, String nameRecord, String idCertification,
 			String phaseOperation) {
 		super();
 		this.keyIntervener = keyIntervener;
@@ -40,11 +40,11 @@ public class InputVerint {
 		this.dateTime = dateTime;
 		this.typeOperation = typeOperation;
 		this.typeMatrix = typeMatrix;
-		this.typeDocument = typeDocument;
+		this.tipeDocument = tipeDocument;
 		this.ext = ext;
 		this.size = size;
 		this.product = product;
-		this.cr = cr;
+		this.cR = cR;
 		this.customerId = customerId;
 		this.funtion = funtion;
 		this.typeTransact = typeTransact;
@@ -54,7 +54,7 @@ public class InputVerint {
 		this.signatureAdviser = signatureAdviser;
 		this.contractId = contractId;
 		this.nameRecord = nameRecord;
-		this.idCertificacion = idCertificacion;
+		this.idCertification = idCertification;
 		this.phaseOperation = phaseOperation;
 	}
 
@@ -146,14 +146,14 @@ public class InputVerint {
 	 * @return the typeDocument
 	 */
 	public String getTypeDocument() {
-		return typeDocument;
+		return tipeDocument;
 	}
 
 	/**
 	 * @param typeDocument the typeDocument to set
 	 */
-	public void setTypeDocument(String typeDocument) {
-		this.typeDocument = typeDocument;
+	public void settipeDocument(String tipeDocument) {
+		this.tipeDocument = tipeDocument;
 	}
 
 	/**
@@ -201,28 +201,28 @@ public class InputVerint {
 	/**
 	 * @return the cr
 	 */
-	public String getCr() {
-		return cr;
+	public String getcR() {
+		return cR;
 	}
 
 	/**
 	 * @param cr the cr to set
 	 */
-	public void setCr(String cr) {
-		this.cr = cr;
+	public void setcR(String cR) {
+		this.cR = cR;
 	}
 
 	/**
 	 * @return the customerId
 	 */
-	public String getCustomerId() {
+	public String getcustomerId() {
 		return customerId;
 	}
 
 	/**
 	 * @param customerId the customerId to set
 	 */
-	public void setCustomerId(String customerId) {
+	public void setcustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 
@@ -342,14 +342,14 @@ public class InputVerint {
 	 * @return the idCertificacion
 	 */
 	public String getIdCertificacion() {
-		return idCertificacion;
+		return idCertification;
 	}
 
 	/**
 	 * @param idCertificacion the idCertificacion to set
 	 */
-	public void setIdCertificacion(String idCertificacion) {
-		this.idCertificacion = idCertificacion;
+	public void setidCertification(String idCertification) {
+		this.idCertification = idCertification;
 	}
 
 	/**
@@ -373,11 +373,11 @@ public class InputVerint {
 	public String toString() {
 		return "InputVerint [keyIntervener=" + keyIntervener + ", documentKey=" + documentKey + ", contactIdVerint="
 				+ contactIdVerint + ", dateTime=" + dateTime + ", typeOperation=" + typeOperation + ", typeMatrix="
-				+ typeMatrix + ", typeDocument=" + typeDocument + ", ext=" + ext + ", size=" + size + ", product="
-				+ product + ", cr=" + cr + ", customerId=" + customerId + ", funtion=" + funtion + ", typeTransact="
+				+ typeMatrix + ", tipeDocument=" + tipeDocument + ", ext=" + ext + ", size=" + size + ", product="
+				+ product + ", cR=" + cR + ", customerId=" + customerId + ", funtion=" + funtion + ", typeTransact="
 				+ typeTransact + ", sha1n=" + sha1n + ", descriptionDocument=" + descriptionDocument + ", service="
 				+ service + ", signatureAdviser=" + signatureAdviser + ", contractId=" + contractId + ", nameRecord="
-				+ nameRecord + ", idCertificacion=" + idCertificacion + ", phaseOperation=" + phaseOperation + "]";
+				+ nameRecord + ", idCertificacion=" + idCertification + ", phaseOperation=" + phaseOperation + "]";
 	}
 	
 	

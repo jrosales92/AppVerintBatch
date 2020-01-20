@@ -17,7 +17,7 @@ public class InvalidJSON004 extends CustomException {
 	 * @param cause Causa del error
 	 */
 	public InvalidJSON004(Throwable cause) {
-		super("Error el JSON recibido es invalido", cause);
+		super( "Error el JSON recibido es invalido", cause);
 		super.setCodigoError("004");
 	}
 

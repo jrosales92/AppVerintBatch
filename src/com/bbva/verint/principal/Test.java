@@ -1,9 +1,18 @@
 package com.bbva.verint.principal;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Date;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Formatter;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -23,23 +32,84 @@ public class Test {
 		int ejecuta = Integer.parseInt(args[1]);
 		switch (ejecuta) {
 		case 1:
-			System.out.println("Entre en switch 1 a cargaInicial");
+			System.out.println("Entre a switch 1 integra txt entrada");
+			integraArchEntrada(args[0]);
+			break;	
+		case 2:
+			System.out.println("Entre en switch 2 a cargaInicial");
 			cargaInicial(args[0]);
 			break;
-		case 2:
-			System.out.println("Entre a switch 2 lectura result");
+		case 3:
+			System.out.println("Entre a switch 3 lectura result");
 			procesaResult(args[0]);
 			break;
 		default:
 			break;
-		case 3:
-			System.out.println("Entre a switch 3 lectura archivoerror");
+		case 4:
+			System.out.println("Entre a switch 4 lectura archivoerror");
 			cargaArchERR(args[0]);
 			break;	
 		}
 	}
-
-	public static boolean cargaInicial(String pathFile){
+	
+	public static boolean integraArchEntrada(String pathFile) {
+//		File archivo = null;
+//	      FileReader fr = null;
+//	      BufferedReader br = null;
+//	      FileWriter fichero = null;
+//	      PrintWriter pw = null;
+//	      try {
+//	         // Apertura del fichero y creacion de BufferedReader para poder
+//	         // hacer una lectura comoda (disponer del metodo readLine()).
+//	         archivo = new File (pathFile);
+//	         fr = new FileReader (archivo);
+//	         br = new BufferedReader(fr);
+//	         // Lectura del fichero
+//	         String linea;
+//	         while((linea=br.readLine())!=null)
+//	            System.out.println(linea);
+//
+//	             fichero = new FileWriter(ParametrosVerint.PATHFILEERRORES + File.separator + "Json_Final_Entrada.txt");
+//	             pw = new PrintWriter(linea);
+//
+//	             for (int i = 0; i > 10; i++)
+//	                 pw.println("Linea " + i);
+//
+//	         } catch (Exception ex) {
+//	             ex.printStackTrace();
+//	         } finally {
+//	            try {
+//	            // Nuevamente aprovechamos el finally para 
+//	            // asegurarnos que se cierra el fichero.
+//	            if (null != fichero)
+//	               fichero.close();
+//	            } catch (Exception e2) {
+//	               e2.printStackTrace();
+//	            }
+//	         }
+//	      }
+	   
+		boolean isOk = false;
+		try {
+			Scanner input = new Scanner(new File(pathFile));
+			while (input.hasNextLine()) {
+				String line = input.nextLine();
+				JSONArray jsonarray = new JSONArray(line);
+				JSONArray jsonObj = null;
+				for (int i = 0; i < jsonarray.length(); i++) {
+					jsonObj = new JSONArray(line);
+					System.out.println("Procesando linea: " + i);
+					GeneraArchivos ga = new GeneraArchivos();
+		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Json_Final_Entrada.txt", jsonObj.toString());
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return isOk;
+}	
+	
+	public static boolean cargaInicial(String pathFile) {
 		boolean isOk = false;
 	    try {
             Scanner input = new Scanner(new File(pathFile));
@@ -50,20 +120,26 @@ public class Test {
         		for (int i = 0; i < jsonarray.length(); i++) {
 					jsonObj = jsonarray.getJSONObject(i);
 					System.out.println("Procesando linea: " +i);
+				try {	
 					MetadataController.mapJsonInputString(jsonObj.toString());
 					isOk = SendDocument.almacenaInformacion(jsonObj);
+				}catch(Exception ex) {
+					Date fecha = new Date();
+		    		SimpleDateFormat formato = new SimpleDateFormat("yyMMdd");
+		    		String Hoy = formato.format(fecha);
+		    		GeneraArchivos ga = new GeneraArchivos();
+		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", ex.getMessage());
+				}
 				}
             }
             input.close();
-        } catch (CustomException ex) {
-    		GeneraArchivos ga = new GeneraArchivos();
-//    		TODO ACORDAR DE AJUSTAR Y PONER LA FECHA DEL SISTEMA PARA EL NOMBRE DEL ARCHIVO DE ERRORES
-    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT.txt", ex.getMessage());
+        
         } catch (FileNotFoundException e) {
 			e.printStackTrace();
+        } catch (Exception ex) {
 		}
-
 		return isOk;
+
 	}
 	
 	public static boolean procesaResult(String pathFile){

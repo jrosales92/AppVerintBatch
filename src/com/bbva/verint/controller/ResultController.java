@@ -4,6 +4,8 @@ import static java.lang.String.format;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import com.bbva.verint.dao.GeneraArchivos;
 import com.bbva.verint.dao.PaginaDao;
 import com.bbva.verint.parametros.ParametrosVerint;
 import com.bbva.verint.principal.SendDocument;
+import com.bbva.verint.principal.Test;
 import com.syc.rig.client.RigClientException;
 
 public class ResultController extends DataSourceManager{
@@ -55,7 +58,10 @@ public class ResultController extends DataSourceManager{
 				.append(mcexc.getMessage());
 				
 				GeneraArchivos ga = new GeneraArchivos();
-	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_VERINT_RESULT.txt", sb.toString());
+				Date fecha = new Date();
+				SimpleDateFormat formato = new SimpleDateFormat("yymmdd");
+				String Hoy = formato.format(fecha);
+	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", sb.toString());
 	    		
 	    		
 	    		if(mcexc != null)
