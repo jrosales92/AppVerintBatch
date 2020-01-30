@@ -33,7 +33,7 @@ public class ErrorRucEuController  {
 				.append("Error de estructura JSON");
 				
 				Date fecha = new Date();
-	    		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+	    		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
 	    		String Hoy = formato.format(fecha);
 				GeneraArchivos ga = new GeneraArchivos();
 	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", sb.toString());

@@ -174,6 +174,8 @@ public class GeneraArchivos {
 		String ruta = ParametrosVerint.PATHFILES + "VERINT_EU_MSD_" + Hoy + ".TXT";
 
 		StringBuilder lineEu = new StringBuilder();
+		if(verint.getIdCertificacion().isEmpty()||verint.getService().isEmpty()||verint.getPhaseOperation().isEmpty())verint.setIdCertificacion(" ");  verint.setService(" "); verint.setPhaseOperation(" "); {
+			
 		lineEu.append(verint.getDateTime()).append("|")
 		.append(verint.getExt()).append("|")
 		.append(verint.getTypeDocument()).append("|")
@@ -200,6 +202,6 @@ public class GeneraArchivos {
 		
 		GeneraArchivos ga = new GeneraArchivos();
 		ga.writeInfoInFile(ruta, lineEu.toString());
-		
+		}
 	}
 }

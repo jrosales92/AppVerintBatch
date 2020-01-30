@@ -59,7 +59,7 @@ public class ResultController extends DataSourceManager{
 				
 				GeneraArchivos ga = new GeneraArchivos();
 				Date fecha = new Date();
-				SimpleDateFormat formato = new SimpleDateFormat("yymmdd");
+				SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
 				String Hoy = formato.format(fecha);
 	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", sb.toString());
 	    		

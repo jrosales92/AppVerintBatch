@@ -56,62 +56,64 @@ public class Test {
 		}
 	}
 	
-	public static void integraArchEntrada(String pathFile) {
-		File archivo = null;
-	      FileReader fr = null;
-	      BufferedReader br = null;
-	      FileWriter fichero = null;
-	      PrintWriter pw = null;
-	      try {
-	         // Apertura del fichero y creacion de BufferedReader para poder
-	         // hacer una lectura comoda (disponer del metodo readLine()).
-	         archivo = new File (pathFile);
-	         fr = new FileReader (archivo);
-	         br = new BufferedReader(fr);
-	         // Lectura del fichero
-	         String linea;
-	         while((linea=br.readLine())!=null)
-	            System.out.println(linea);
-
-	         pw = new PrintWriter(linea);
-	             fichero = new FileWriter(ParametrosVerint.PATHFILEERRORES + File.separator + "Json_Final_Entrada.txt");
-
-	             for (int i = 0; i > 10; i++)
-	                 pw.println("Linea " + i);
-
-	         } catch (Exception ex) {
-	             ex.printStackTrace();
-	         } finally {
-	            try {
-	            // Nuevamente aprovechamos el finally para 
-	            // asegurarnos que se cierra el fichero.
-	            if (null != fichero)
-	               fichero.close();
-	            } catch (Exception e2) {
-	               e2.printStackTrace();
+	public static boolean integraArchEntrada(String pathFile) {
+		boolean isOk = false;
+		Date fecha = new Date();
+		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
+		String Hoy = formato.format(fecha);
+	    try {
+            Scanner input = new Scanner(new File(pathFile + "file_json_" + Hoy + "_1030.txt"));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                GeneraArchivos ga = new GeneraArchivos();
+	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Archivo_Final_Inicial.txt", line.toString());
+            }
+            try {
+	    		Scanner input2 = new Scanner(new File(pathFile + "file_json_" + Hoy + "_1330.txt"));
+	            while (input2.hasNextLine()) {
+                        String line2 = input2.nextLine();
+                        GeneraArchivos ga = new GeneraArchivos();
+                        ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Archivo_Final_Inicial.txt", line2.toString());
 	            }
-	         }
-	      }
-	   
-//		boolean isOk = false;
-//		try {
-//			Scanner input = new Scanner(new File(pathFile));
-//			while (input.hasNextLine()) {
-//				String line = input.nextLine();
-//				JSONArray jsonarray = new JSONArray(line);
-//				JSONArray jsonObj = null;
-//				for (int i = 0; i < jsonarray.length(); i++) {
-//					jsonObj = new JSONArray(line);
-//					System.out.println("Procesando linea: " + i);
-//					GeneraArchivos ga = new GeneraArchivos();
-//		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Json_Final_Entrada.txt", line.toString());
-//				}
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		return isOk;
-//}	
+                    try {
+                          Scanner input3 = new Scanner(new File(pathFile + "file_json_" + Hoy + "_1630.txt"));
+                          while (input3.hasNextLine()) {
+                              String line3 = input3.nextLine();
+                              GeneraArchivos ga = new GeneraArchivos();
+                              ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Archivo_Final_Inicial.txt", line3.toString());
+                          }
+                          try {
+                                Scanner input4 = new Scanner(new File(pathFile + "file_json_" + Hoy + "_1930.txt"));
+                                while (input4.hasNextLine()) {
+                                    String line4 = input4.nextLine();
+                                    GeneraArchivos ga = new GeneraArchivos();
+                                    ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "Archivo_Final_Inicial.txt", line4.toString());
+                                }
+                                    input.close();
+                                
+						
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+
+				}
+
+				catch (Exception ex2) {
+					ex2.printStackTrace();
+				}
+
+			} catch (Exception ex3) {
+				ex3.printStackTrace();
+			}
+
+		} catch (Exception ex4) {
+			ex4.printStackTrace();
+		}
+		
+		return isOk;
+                 
+	}
+            
 	
 	public static boolean cargaInicial(String pathFile) {
 		boolean isOk = false;
@@ -129,7 +131,7 @@ public class Test {
 					isOk = SendDocument.almacenaInformacion(jsonObj);
 				}catch(Exception ex) {
 					Date fecha = new Date();
-		    		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+		    		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
 		    		String Hoy = formato.format(fecha);
 		    		GeneraArchivos ga = new GeneraArchivos();
 		    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", ex.getMessage());
@@ -194,7 +196,7 @@ public class Test {
                 StringBuilder sb = new StringBuilder();
                 sb.append("ERROR004").append("|").append(line);
                 Date fecha = new Date();
-	    		SimpleDateFormat formato = new SimpleDateFormat("ddMMyyyy");
+	    		SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
 	    		String Hoy = formato.format(fecha);
                 GeneraArchivos ga = new GeneraArchivos();
 	    		ga.writeInfoInFile(ParametrosVerint.PATHFILEERRORES + File.separator + "ERRORES_VERINT_RESULT_" + Hoy + ".txt", sb.toString());
